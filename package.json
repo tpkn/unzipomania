@@ -1,0 +1,20 @@
+{
+   "name": "unzipomania",
+   "main": "unzipomania.js",
+   "version": "1.0.0",
+   "author": {
+      "url": "https://github.com/tpkn/"
+   },
+   "dependencies": {
+      "fs-extra": "latest",
+      "yauzl": "latest"
+   },
+   "repository": "https://github.com/tpkn/unzipomania",
+   "license": "MIT",
+   "keywords": [
+      "unzip",
+      "multiple",
+      "deep",
+      "yauzl"
+   ]
+}
