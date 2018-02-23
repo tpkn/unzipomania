@@ -46,39 +46,33 @@ new Unzipomania({
 
 ## Options
 
-### zip_file
-Type: *String*
-
-Aliases: `file`, `zip`
-
-
-### unzip_folder
-Type: *String*
-
-Default: *main_zip_path/zip_name*
+### zip_file 
+Type: *String* 
+Aliases: `file`, `zip` 
 
 
-### keep_zip
-Type: *Boolean*
-
-Default: `false`
-
-Keep already uzipped archives
+### unzip_folder 
+Type: *String* 
+Default: *main_zip_path/zip_name* 
 
 
-### no_wrapper
-Type: *Boolean*
+### keep_zip 
+Type: *Boolean* 
+Default: `false` 
+Keep already uzipped archives 
 
-Default: `true`
 
-Remove wrapping folder
+### no_wrapper 
+Type: *Boolean* 
+Default: `true` 
+Remove wrapping folder 
 
 
 
 
 ## Changelog 
 #### 2018-02-23:
-- Moved from `yauzl` to `decompress` module
+- Moved from `yauzl` to `decompress` module 
 - Fixed incorrect finish error
 
 
