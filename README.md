@@ -32,7 +32,7 @@ new Unzipomania({
 ```
 
 
-## Output example
+## Output
 ```
 { 
   id: 0,
@@ -44,14 +44,28 @@ new Unzipomania({
 ```
 
 
-## Params
-| Property | Default  | Description |
-| ------ | :------: | :------: |
-| `zip_file` | - | input file (aliases: `file`, `zip`) |
-| `unzip_folder` | `input_path/zip_name` | output folder |
-| `keep_zip` | `false` | keep uzipped archives |
-| `no_wrapper` | `true` | remove wrapping folder |
+## Options
 
+#### zip_file
+__Type__: *String*
+__Aliases__: `file`, `zip`
+
+
+#### unzip_folder
+__Type__: *String*
+__Default__: *main_zip_path/zip_name*
+
+
+#### keep_zip
+__Type__: *Boolean*
+__Default__: `false`
+Keep already uzipped archives
+
+
+#### no_wrapper
+__Type__: *Boolean*
+__Default__: `true`
+Remove wrapping folder
 
 
 
