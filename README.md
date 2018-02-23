@@ -1,5 +1,5 @@
 # Unzipomania
-Nodejs module for 'deep' unzipping (based on yauzl).
+Nodejs module for 'deep' unzipping.
 
 
 Module recursively unzips all zip archives inside the specified zip. It can:
@@ -32,16 +32,6 @@ new Unzipomania({
 ```
 
 
-## Params
-| Property | Default  | Description |
-| ------ | :------: | :------: |
-| `zip_file` | - | input file (aliases: `file`, `zip`) |
-| `unzip_folder` | `input_path/zip_name` | output folder |
-| `keep_zip` | `false` | keep uzipped archives |
-| `no_wrapper` | `true` | remove wrapping folder |
-
-
-
 ## Output example
 ```
 { 
@@ -52,3 +42,23 @@ new Unzipomania({
   output: 'X:/unzipomania/1516729394918/' 
 }
 ```
+
+
+## Params
+| Property | Default  | Description |
+| ------ | :------: | :------: |
+| `zip_file` | - | input file (aliases: `file`, `zip`) |
+| `unzip_folder` | `input_path/zip_name` | output folder |
+| `keep_zip` | `false` | keep uzipped archives |
+| `no_wrapper` | `true` | remove wrapping folder |
+
+
+
+
+
+## Changelog 
+#### 2018-02-23:
+- Moved from `yauzl` to `decompress` module
+- Fixed incorrect finish error
+
+
