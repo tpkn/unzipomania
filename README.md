@@ -46,19 +46,19 @@ new Unzipomania({
 
 ## Options
 
-#### zip_file
+### zip_file
 Type: *String*
 
 Aliases: `file`, `zip`
 
 
-#### unzip_folder
+### unzip_folder
 Type: *String*
 
 Default: *main_zip_path/zip_name*
 
 
-#### keep_zip
+### keep_zip
 Type: *Boolean*
 
 Default: `false`
@@ -66,7 +66,7 @@ Default: `false`
 Keep already uzipped archives
 
 
-#### no_wrapper
+### no_wrapper
 Type: *Boolean*
 
 Default: `true`
