@@ -47,24 +47,24 @@ new Unzipomania({
 ## Options
 
 ### zip_file 
-*Type*: *String*<br>
-*Aliases*: `file`, `zip` 
+__Type__: *String*<br>
+__Aliases__: `file`, `zip` 
 
 
 ### unzip_folder 
-*Type*: *String*<br>
-*Default*: *main_zip_path/zip_name* 
+__Type__: *String*<br>
+__Default__: *main_zip_path/zip_name* 
 
 
 ### keep_zip 
-*Type*: *Boolean*<br>
-*Default*: `false`<br>
+__Type__: *Boolean*<br>
+__Default__: `false`<br>
 Keep already uzipped archives 
 
 
 ### no_wrapper 
-*Type*: *Boolean*<br>
-*Default*: `true`<br>
+__Type__: *Boolean*<br>
+__Default__: `true`<br>
 Remove wrapping folder 
 
 
