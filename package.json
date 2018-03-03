@@ -1,13 +1,13 @@
 {
    "name": "unzipomania",
    "main": "unzipomania.js",
-   "version": "1.1.0",
+   "version": "1.2.0",
    "author": {
       "url": "https://github.com/tpkn/"
    },
    "dependencies": {
-      "fs-extra": "latest",
-      "decompress": "latest"
+		"globby": "latest",
+		"decompress": "latest"
    },
    "repository": "https://github.com/tpkn/unzipomania",
    "license": "MIT",

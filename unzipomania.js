@@ -1,115 +1,73 @@
 /*!
- * Unzipomania (v1.1.0.20180223), http://tpkn.me/
+ * Unzipomania (v1.2.0.20180303), http://tpkn.me/
  */
 
-const fs = require('fs-extra');
+const fs = require('fs');
 const path = require('path');
+const globby = require('globby');
 const decompress = require('decompress');
-
 
 function isFolder(dir){
    try { return fs.lstatSync(dir).isDirectory() }catch(err){ return false }
 }
 
-function listDir(dir){
-   try { return fs.readdirSync(dir) }catch(err){ return [] }
-}
-
-/**
- * Check if folder has alone folder inside (maybe with files)
- * 
- * @param  {String} dir
- * @return {String} - folder name or null
- */
-function getWrapper(dir){
-   let list = listDir(dir);
-   if(list && list.length == 1 && isFolder(dir)){
-      return list[0];
-   }else{
-      return '';
-   }
-}
-
-function Unzipomania(config){
+function Unzipomania(input, output, options = {}){
    return new Promise((resolve, reject) => {
 
-      let zips_total = 0;
-      let msg_data = {id: 0, status: 'fail', message: '', errors: []};
+      let logger = {status: 'fail', message: '', list: []};
 
-      if(typeof config !== 'object'){
-         msg_data.message = 'No config!';
-         return reject(msg_data)
+      if(typeof input !== 'string'){
+         logger.message = 'No input!';
+         return reject(logger);
       }
 
-      let zip_file = config.file || config.zip || config.zip_file;
-
-      if(!/\.zip$/i.test('' + zip_file)){
-         msg_data.message = 'No zip file!';
-         return reject(msg_data);
+      if(typeof output === 'object'){
+         options = output;
       }
 
-      let unzip_folder = config.unzip_folder || path.join(path.parse(zip_file).dir, path.basename(zip_file, path.extname(zip_file)));
-      let no_wrapper = typeof config.no_wrapper !== 'boolean' ? true : config.no_wrapper;
-      let keep_zip = typeof config.keep_zip !== 'boolean' ? false : config.keep_zip;
+      if(typeof output === 'undefined' || typeof output === 'object'){
+         output = isFolder(input) ? input : path.parse(input).dir;
+      }
 
-      msg_data.input = zip_file;
-      msg_data.output = unzip_folder;
+      loop(input);
 
-      try {
-         unzip(zip_file, unzip_folder);
 
-         function unzip(zip_file, unzip_folder){
-            decompress(zip_file, unzip_folder, {
-               filter: file => !(/(__MACOSX|\.DS_Store)/i.test(path.extname(file.path)))
-            })
-            .then(files => {
+      function loop(dir){
+         globby(dir, {expandDirectories: {extensions: ['zip']}}).then(files => {
 
-               if(!keep_zip){
-                  fs.remove(zip_file, err => {
-                     if(err) {
-                        msg_data.errors.push(err.message)
+            let total = files.length;
+
+            if(total == 0){
+               logger.status = 'ok';
+               logger.message = 'completed';
+               return resolve(logger);
+            }
+
+            for(let i = 0, len = files.length; i < len; i++){
+
+               let file = files[i];
+               let folder = path.join(output, path.basename(file, path.extname(file)));
+
+               decompress(file, folder, {
+                  filter: file => !/(__MACOSX|DS_Store)/.test(file.path)
+               })
+               .then(files => {
+                  total--;
+                  logger.list.push({file: path.basename(file), folder: folder});
+
+                  fs.unlink(file, err => {
+                     if(err) console.log(file, err.message);
+
+                     if(total == 0){
+                        loop(output);
                      }
                   });
-               }
-
-               for(let i = 0, len = files.length; i < len; i++){
-                  let file = files[i];
-
-                  if(file.type == 'file' && /\.zip$/i.test(file.path)){
-                     zips_total++;
-                     
-                     let next_file = path.join(unzip_folder, file.path);
-                     let next_folder = path.join(unzip_folder, file.path.replace('.zip', ''));
-
-                     unzip(next_file, next_folder);
-                  }
-               }
-
-               if(zips_total == 0){
-                  msg_data.status = 'ok';
-                  msg_data.message = 'Unzipping completed!';
-
-                  // No wrapping folder at the root!
-                  if(no_wrapper){
-                     let wrapper = getWrapper(unzip_folder);
-                     if(wrapper){
-                        fs.moveSync(path.join(unzip_folder, wrapper), unzip_folder);
-                     }
-                  }
-
-                  resolve(msg_data);
-               }
-
-               zips_total--;
-
-            }).catch(err => {
-               msg_data.message = err.message;
-               reject(msg_data);
-            })
-         }
-      }catch(err){
-         msg_data.message = err.message;
-         reject(msg_data);
+               })
+               .catch(err => {
+                  reject(err)
+               });
+            }
+         });
       }
    });
 }
