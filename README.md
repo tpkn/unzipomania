@@ -1,29 +1,19 @@
 # Unzipomania
-Nodejs module for 'deep' unzipping.
+Node.js module for 'deep' unzipping
 
 
-Module recursively unzips all zip archives inside the specified zip. It can:
-- create output folder based on input file name
-- remove source zip files after unzipping
-- remove wrapping folder at the root of the output folder, like that:
-```
-dir/               --->    dir/
-  └─ folder/                 ├─ file1
-     ├─ file1                └─ folder/
-     └─ folder/                 ├─ file2
-        ├─ file2                └─ file3
-        └─ file3                        
-```
+
+Keep in mind that zip files would be removed right after extraction!
 
 
 ## Usage
 ```javascript
 const Unzipomania = require('unzipomania');
 
-new Unzipomania({
-   zip: path.join(__dirname, 'test.zip'), 
-   unzip_folder: path.join(__dirname, Date.now())
-})
+let input = '/input/test.zip';
+let output = '/output';
+
+Unzipomania(input, output)
 .then(result => {
    console.log(result);
 }, error => {
@@ -32,46 +22,36 @@ new Unzipomania({
 ```
 
 
+## API
+
+### input 
+__Type__: *String*<br>
+Path to folder or path to zip file.
+
+
+### output 
+__Type__: *String*<br>
+__Default__: */{input}*<br>
+ Path to output folder. If not set, then it would be equal to input path.
+
+
+
 ## Output
 ```
-{ 
-  id: 0,
-  status: 'ok',
-  message: 'Unzipping completed!',
-  input: 'X:/unzipomania/test.zip',
-  output: 'X:/unzipomania/1516729394918/' 
+{ status: 'ok',
+  message: 'completed',
+  list: [
+    { file: 'file1.zip', folder: 'X:/output/file1' },
+    { file: 'file2.zip', folder: 'X:/output/file2' },
+    { file: 'file3.zip', folder: 'X:/output/file3' }
+  ]
 }
 ```
 
 
-## Options
-
-### zip_file 
-__Type__: *String*<br>
-__Aliases__: `file`, `zip` 
-
-
-### unzip_folder 
-__Type__: *String*<br>
-__Default__: *main_zip_path/zip_name* 
-
-
-### keep_zip 
-__Type__: *Boolean*<br>
-__Default__: `false`<br>
-Keep already uzipped archives 
-
-
-### no_wrapper 
-__Type__: *Boolean*<br>
-__Default__: `true`<br>
-Remove wrapping folder 
-
-
-
 
 ## Changelog 
-#### 2018-02-23:
+#### 2018-03-03:
 - Moved from `yauzl` to `decompress` module 
 - Fixed incorrect finish error
 
