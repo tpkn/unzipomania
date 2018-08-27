@@ -1,19 +1,23 @@
 {
    "name": "unzipomania",
    "main": "unzipomania.js",
-   "version": "1.2.0",
+   "version": "2.0.1",
    "author": {
       "url": "https://github.com/tpkn/"
    },
    "dependencies": {
-		"globby": "latest",
-		"decompress": "latest"
+      "readdirrec": "latest",
+      "decompress": "latest"
    },
    "repository": "https://github.com/tpkn/unzipomania",
    "license": "MIT",
    "keywords": [
+      "zip",
       "unzip",
       "multiple",
+      "batch",
+      "extract",
+      "archive",
       "deep",
       "decompress"
    ]
