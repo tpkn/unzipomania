@@ -1,12 +1,11 @@
 {
    "name": "unzipomania",
    "main": "unzipomania.js",
-   "version": "2.0.1",
+   "version": "2.1.0",
    "author": {
       "url": "https://github.com/tpkn/"
    },
    "dependencies": {
-      "readdirrec": "latest",
       "decompress": "latest"
    },
    "repository": "https://github.com/tpkn/unzipomania",

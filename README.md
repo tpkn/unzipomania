@@ -1,8 +1,8 @@
 # Unzipomania
-Node.js module for 'deep' unzipping
+Node.js module for recursive unpacking archives
 
-
-Keep in mind that zip files would be removed right after extraction!
+Unpacks all archives including nested ones (optional).
+[![npm Package](https://img.shields.io/npm/v/unzipomania.svg)](https://www.npmjs.org/package/unzipomania)
 
 
 ## Installation
@@ -13,36 +13,36 @@ npm install unzipomania
 
 
 ## API
-### Unzipomania(options)
+```javascript
+await Unzipomania(input[, output_folder, options])
+```
+
+### options.deep   
+**Type**: _Boolean_   
+**Default**: `false`   
+Unpack nested archives  
 
 
-### options.zip   
-**Type**: _String|Array_   
-Single zip or a list of archives  
-
-
-### options.folder  
-**Type**: _String_   
-Unzip folder  
+### options.remove_source  
+**Type**: _Boolean_   
+**Default**: `false`   
+Delete source zip file 
 
 
 
 ## Usage
 ```javascript
-const path = require('path');
 const Unzipomania = require('unzipomania');
 
-let file1 = path.join(__dirname, 'light_zip.zip');
-let file2 = path.join(__dirname, 'super_zip.zip');
-let file3 = path.join(__dirname, 'same_super_zip.zip');
-
-let output = path.join(__dirname, (Math.floor(Math.random() * 1000000).toString('16')));
+let file1 = 'z:\unzipomania\zip1.zip';
+let file2 = 'z:\unzipomania\zip2.zip';
+let file3 = 'z:\unzipomania\zip3.zip';
+let output = 'z:\unzipomania\unzip\';
 
 (async () => {
    try {
 
-      let um = await Unzipomania({ zip: [file1, file2, file3], folder: output });
-      console.log(um); //=> wheh
+      await Unzipomania([ file1, file2, file3 ], output, { remove_source: true });
 
    }catch(err){
       console.log(err);
@@ -53,6 +53,10 @@ let output = path.join(__dirname, (Math.floor(Math.random() * 1000000).toString(
 
 
 ## Changelog 
+#### v2.1.0 (2019-07-16):
+- faster and more stable
+- fixed bugs
+
 #### v2.0.1 (2018-08-26):
 - fixed bugs
 
