@@ -34,10 +34,10 @@ Delete source zip file
 ```javascript
 const Unzipomania = require('unzipomania');
 
-let file1 = 'z:\unzipomania\zip1.zip';
-let file2 = 'z:\unzipomania\zip2.zip';
-let file3 = 'z:\unzipomania\zip3.zip';
-let output = 'z:\unzipomania\unzip\';
+let file1 = './unzipomania/zip1.zip';
+let file2 = './unzipomania/zip2.zip';
+let file3 = './unzipomania/zip3.zip';
+let output = './unzipomania/unzip\';
 
 (async () => {
    try {
