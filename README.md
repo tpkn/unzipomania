@@ -1,8 +1,8 @@
 # Unzipomania
 Node.js module for recursive unpacking archives
 
-Unpacks all archives including nested ones (optional).
 [![npm Package](https://img.shields.io/npm/v/unzipomania.svg)](https://www.npmjs.org/package/unzipomania)
+Unpacks all archives including nested ones (optional).
 
 
 ## Installation
