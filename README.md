@@ -17,6 +17,15 @@ npm install unzipomania
 await Unzipomania(input[, output_folder, options])
 ```
 
+### input   
+**Type**: _String_|_Array_   
+Single file or array of files 
+
+### output_folder   
+**Type**: _String_   
+Unzip folder 
+
+
 ### options.deep   
 **Type**: _Boolean_   
 **Default**: `false`   
@@ -37,7 +46,7 @@ const Unzipomania = require('unzipomania');
 let file1 = './unzipomania/zip1.zip';
 let file2 = './unzipomania/zip2.zip';
 let file3 = './unzipomania/zip3.zip';
-let output = './unzipomania/unzip\';
+let output = './unzipomania/unzip/';
 
 (async () => {
    try {
